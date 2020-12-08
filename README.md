@@ -18,3 +18,12 @@ on the RStudio Connect server. Whereas the pin does not. {pins} however
 has to read in the entire dataset into memory before writing agian. So
 just be sure that your survey is a manageable size (keep it under
 100mb\!).
+
+Files:
+
+  - `app-sqlite.R`: Records entries to SQLite DB.
+  - `app-pins.R`: Record entries to RSC pins.
+  - `pkgs.rds`: List of all packages. Used for sake of example.
+    Generated from `tools::CRAN_package_db()$Package`.
+  - `fav-pkg.sqlite`: The sqlite database.
+  - `setup.R`: The R file used to create the SQLite database and pin.
