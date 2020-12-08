@@ -26,6 +26,7 @@ insert_statement <- RSQLite::dbSendStatement(con,
   params = res
   )
 
+results <- DBI::dbGetQuery(con, "select * from results")
 
 # get queries
 dbDisconnect(con)
@@ -35,3 +36,16 @@ dbDisconnect(con)
 
 pkgs <- tools::CRAN_package_db()$Package
 readr::write_rds(pkgs, "pkgs.rds")
+
+
+
+# Create Pin --------------------------------------------------------------
+
+# connect to the pin board
+pins::board_register_rsconnect(server = Sys.getenv("CONNECT_SERVER"),
+                               key = Sys.getenv("CONNECT_API_KEY"))
+
+
+pins::pin(results, "fav-pkg", board = "rsconnect")
+
+pins::pin_get("josiah/fav-pkg", board = "rsconnect")

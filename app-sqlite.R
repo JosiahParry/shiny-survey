@@ -44,9 +44,7 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output, session) {
 
-    # Leaves goButton3's icon, if it exists,
-    # unchaged and changes its label
-
+    # Change the button appearance if it has been clicked
     observeEvent(input$submit, {
         updateActionButton(session, "submit",
                            label = "Thanks!")
@@ -66,6 +64,9 @@ server <- function(input, output, session) {
 
 
     observeEvent(input$submit, {
+
+        # write to database -------------------------------------------------------
+        # if statement prevents multiple submissions.
 
         if (input$submit == 1) {
             con <- DBI::dbConnect(RSQLite::SQLite(), "fav-pkg.sqlite")
